@@ -98,6 +98,7 @@ class VideoParams:
     video_language: Optional[str] = ""  # auto detect
 
     voice_name: Optional[str] = ""
+    voice_volume: Optional[float] = 1.0
     bgm_type: Optional[str] = "random"
     bgm_file: Optional[str] = ""
     bgm_volume: Optional[float] = 0.2
@@ -196,6 +197,9 @@ class TaskQueryResponse(BaseResponse):
                     "progress": 100,
                     "videos": [
                         "http://127.0.0.1:8080/tasks/6c85c8cc-a77a-42b9-bc30-947815aa0558/final-1.mp4"
+                    ],
+                    "combined_videos": [
+                        "http://127.0.0.1:8080/tasks/6c85c8cc-a77a-42b9-bc30-947815aa0558/combined-1.mp4"
                     ]
                 }
             },
@@ -222,7 +226,39 @@ class VideoTermsResponse(BaseResponse):
                 "status": 200,
                 "message": "success",
                 "data": {
-                    "video_terms": []
+                    "video_terms": ["sky", "tree"]
+                }
+            },
+        }
+
+
+class BgmRetrieveResponse(BaseResponse):
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "status": 200,
+                "message": "success",
+                "data": {
+                    "files": [
+                        {
+                            "name": "output013.mp3",
+                            "size": 1891269,
+                            "file": "/MoneyPrinterTurbo/resource/songs/output013.mp3"
+                        }
+                    ]
+                }
+            },
+        }
+
+
+class BgmUploadResponse(BaseResponse):
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "status": 200,
+                "message": "success",
+                "data": {
+                    "file": "/MoneyPrinterTurbo/resource/songs/example.mp3"
                 }
             },
         }
